@@ -25,7 +25,7 @@ public class Main extends Application {
 			AnchorPane pane = loader.load();
 
 			MainWindowController mainWindowController = loader.getController();
-			mainWindowController.setMain(this);
+			mainWindowController.setMain(this, this.primaryStage);
 
 			Scene scene = new Scene(pane);
 

@@ -1,83 +1,57 @@
 package controller;
 
-import java.util.Optional;
-
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.control.TextInputDialog;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import model.Person;
 
 public class MainWindowController {
 
 	@FXML
-	private Label label;
-
+	private TableView<Person> tableView;
 	@FXML
-	private TextField field;
+	private TableColumn<Person, String> firstNameColumn;
+	@FXML
+	private TableColumn<Person, String> lastNameColumn;
+	@FXML
+	private TableColumn<Person, String> ageColumn;
 
-	private Person person;
+	private ObservableList<Person> personList = FXCollections.observableArrayList();
 
 	private Main main;
+	private Stage primaryStage;
 
-	public void setMain(Main main) {
+	public void initialize() {
+		firstNameColumn.setCellValueFactory(new PropertyValueFactory<Person, String>("firstName"));
+		lastNameColumn.setCellValueFactory(new PropertyValueFactory<Person, String>("lastName"));
+		ageColumn.setCellValueFactory(new PropertyValueFactory<Person, String>("age"));
+	}
+
+	public void setMain(Main main, Stage primaryStage) {
 		this.main = main;
-		this.person = new Person("Bob", "Manderly", "55");
+		this.primaryStage = primaryStage;
+		setTableData();
+		tableView.setItems(personList);
 	}
 
-	public void handleButton() {
-		String text = field.getText();
-		label.setText(person.getFirstName());
-		field.clear();
+	public void setTableData() {
+		personList.add(new Person("Andy", "A", "11"));
+		personList.add(new Person("John", "B", "22"));
+		personList.add(new Person("Mary", "C", "33"));
+		personList.add(new Person("Bill", "D", "44"));
+		personList.add(new Person("Steve", "E", "55"));
+		personList.add(new Person("Gary", "F", "66"));
+		personList.add(new Person("Fred", "G", "77"));
+		personList.add(new Person("Jay", "H", "88"));
+		personList.add(new Person("Clare", "I", "99"));
 	}
 
-	public void showAlert1() {
-		Alert alert = new Alert(AlertType.INFORMATION);
-		alert.setTitle("Information");
-		alert.setHeaderText("Information header text");
-		alert.setContentText("This is the information text");
-		alert.showAndWait();
-	}
-
-	public void showAlert2() {
-		Alert alert = new Alert(AlertType.ERROR);
-		alert.setTitle("Information");
-		alert.setHeaderText("Information header text");
-		alert.setContentText("This is the information text");
-		alert.showAndWait();
-	}
-
-	public void showAlert3() {
-		Alert alert = new Alert(AlertType.WARNING);
-		alert.setTitle("Information");
-		alert.setHeaderText("Information header text");
-		alert.setContentText("This is the information text");
-		alert.showAndWait();
-	}
-
-	public void showAlert4() {
-		Alert alert = new Alert(AlertType.CONFIRMATION);
-		alert.setTitle("Information");
-		alert.setHeaderText("Information header text");
-		alert.setContentText("This is the information text");
-		Optional<ButtonType> result = alert.showAndWait();
-		if (result.get() == ButtonType.OK) {
-			System.out.println("pressed ok");
-		} else {
-			System.out.println("pressed cancel");
-		}
-	}
-
-	public void showAlert5() {
-		TextInputDialog dialog = new TextInputDialog();
-		Optional<String> result = dialog.showAndWait();
-		if (result.isPresent()) {
-			System.out.println(result.get());
-		}
-
+	public void closeWindow() {
+		this.primaryStage.close();
 	}
 
 }
