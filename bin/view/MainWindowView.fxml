@@ -18,6 +18,11 @@
          <children>
             <TextField fx:id="field" />
             <Button mnemonicParsing="false" onAction="#handleButton" text="change Text" />
+            <Button mnemonicParsing="false" onAction="#showAlert1" text="Alert1" />
+            <Button mnemonicParsing="false" onAction="#showAlert2" text="Alert2" />
+            <Button mnemonicParsing="false" onAction="#showAlert3" text="Alert3" />
+            <Button mnemonicParsing="false" onAction="#showAlert4" text="Alert4" />
+            <Button mnemonicParsing="false" onAction="#showAlert5" text="Alert5" />
          </children>
       </HBox>
    </children>
